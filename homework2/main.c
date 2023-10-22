@@ -176,7 +176,18 @@ int sum_first_primes(int n) {
     Beispiel für `n = 4`: `2 + 3 + 5 + 7 = 17`.
     */
     /* BEGIN CHANGES */
-
+    int prime_sum = 0;
+    int num = 2;
+    int primes_found = 0;
+    while (primes_found < n) {
+        if (is_prime(num) == 1) {
+            prime_sum += num;
+            primes_found++;
+        }
+        num++;
+    }
+    result = prime_sum;
+    printf("%d", result);
     /* END CHANGES */
     return result;
 }
