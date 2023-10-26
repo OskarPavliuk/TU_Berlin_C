@@ -35,27 +35,23 @@ int my_squareroot(int n) {
 }
 
 Canvas draw_circle(Canvas c, int x, int y, int diameter) {
-    int radius = diameter / 2; // Радіус кола
-
-    double centerX = x + radius;
-    double centerY = y + radius;
-
-    double step = 0.01;
-
-    for (double i = x; i < x + diameter; i += step) {
-        for (double j = y; j < y + diameter; j += step) {
-            double dx = i - centerX;
-            double dy = j - centerY;
-            double distance = dx * dx + dy * dy;
-
-            if (distance <= radius * radius) {
-                int pixel_x = (int) (i + 0.5);
-                int pixel_y = (int) (j + 0.5);
-
-                c = canvas_set_black(c, pixel_x, pixel_y);
-            }
-        }
+     int radius;
+    
+    if (diameter % 2 == 1){
+        radius = (diameter / 2);
+        draw_odd_circle(c, x + radius, y + radius, radius);
     }
+
+        if (diameter % 2 == 0) {
+            radius = (diameter / 2) - 1;
+            int centerXPixel = x + radius;
+            int centerYPixel = y + radius;
+            // Wenn der Durchmesser gerade ist, zeichnen Sie zusätzliche Pixel in der Mitte des Kreises
+            draw_odd_circle(c, centerXPixel, centerYPixel, radius);
+            draw_odd_circle(c, centerXPixel + 1, centerYPixel, radius);
+            draw_odd_circle(c, centerXPixel, centerYPixel + 1, radius);
+            draw_odd_circle(c, centerXPixel + 1, centerYPixel + 1, radius);
+        }
 
     return c;
 }
