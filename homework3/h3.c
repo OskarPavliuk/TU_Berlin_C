@@ -77,10 +77,25 @@ Canvas descending_diagonal(Canvas c) {
 }
 
 Canvas draw_rectangle(Canvas c, int x, int y, int width, int height) {
-
+if (width > 0 && height > 0) {
+                for (int j = y; j > y - height; j--) {
+                    for (int i = x; i < x + width; i++) {
+                        if (valid_pixel(c, i, j)){
+                            c = canvas_set_black(c, i, j);
+                        }}
+                }
+            }
     return c;
 }
 
 Canvas draw_rectangle_via_corners(Canvas c, int x0, int y0, int x1, int y1) {
+    if (canvas_width(c) > 0 && canvas_height(c) > 0) {
+        for (int j = y0; j >= y1; j--) {
+            for (int i = x0; i <= x1; i++) {
+                if (valid_pixel(c, i, j)){
+                    c = canvas_set_black(c, i, j);
+                }}
+        }
+    }
     return c;
 }
